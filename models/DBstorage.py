@@ -5,7 +5,7 @@ Contains the class DBStorage
 
 import models
 from models.test_score import TestScore
-from models.user import User
+from models.user import User, Base
 from os import getenv
 import sqlalchemy
 from sqlalchemy import create_engine

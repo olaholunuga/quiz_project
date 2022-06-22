@@ -4,10 +4,11 @@ from flask import Blueprint, jsonify, abort, render_template, request, flash, se
 from flask_login import login_required, logout_user, current_user, login_user
 from models import storage
 from models.user import User
-from forms import SignupForm, LoginForm
-from .app import login_manager
+from .forms import SignupForm, LoginForm
 
-auth_bp = Blueprint(name="auth_bp", url_prefix="/auth", template_folder="templates", static_folder="static")
+auth_bp = Blueprint(name="auth_bp", url_prefix="/auth", template_folder="templates", static_folder="static", import_name="__name__")
+
+from .app import login_manager
 
 @auth_bp.route('/signup', methods=['GET', 'POST'])
 def signup():
@@ -85,3 +86,7 @@ def unauthorized():
     """Redirect unauthorized users to Login page."""
     flash('You must be logged in to view that page.')
     return redirect(url_for('auth_bp.login'))
+
+@auth_bp.route("/hello")
+def say_hello():
+    return jsonify({"msg": "hello_world"})
