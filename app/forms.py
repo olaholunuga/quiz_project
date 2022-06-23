@@ -13,7 +13,7 @@ from wtforms.validators import (
 
 class SignupForm(FlaskForm):
     """User Sign-up Form."""
-    first_name = StringField(
+    name = StringField(
         'first name',
         validators=[DataRequired()]
     )

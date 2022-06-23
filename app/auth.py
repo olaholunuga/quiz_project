@@ -30,7 +30,7 @@ def signup():
             )
             user.save()  # Create new user
             login_user(user)  # Log in as newly created user
-            return redirect(url_for('main_bp.dashboard'))
+            return redirect(url_for('home'))
         flash('A user already exists with that email address.')
         return redirect(url_for('auth_bp.signup_page'))
     return render_template(
@@ -52,7 +52,7 @@ def login():
     """
     # Bypass if user is logged in
     if current_user.is_authenticated:
-        return redirect(url_for('main_bp.dashboard'))
+        return redirect(url_for('home'))
 
     form = LoginForm()
     # Validate login attempt
@@ -61,7 +61,7 @@ def login():
         if user and user.check_password(password=form.password.data):
             login_user(user)
             next_page = request.args.get('next')
-            return redirect(next_page or url_for('main_bp.dashboard'))
+            return redirect(next_page or url_for('home'))
         flash('Invalid username/password combination')
         return redirect(url_for('auth_bp.login'))
     return render_template(

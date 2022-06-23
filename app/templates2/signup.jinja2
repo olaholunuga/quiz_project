@@ -1,26 +1,31 @@
 {% extends "layout.jinja2" %}
 
-{% block pagestyles %}
-  <link href="{{ url_for('static', filename='dist/css/account.css') }}" rel="stylesheet" type="text/css">
-{% endblock %}
 
 {% block content %}
   <div class="form-wrapper">
 
     <div class="logo">
-      <img src="{{ url_for('static', filename='dist/img/logo.png') }}" alt="logo"/>
+      <img
+        src="{{ url_for('static', filename='dist/img/logo.png') }}"
+        alt="logo"
+      />
     </div>
 
     {% for message in get_flashed_messages() %}
       <div class="alert alert-warning">
-        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="alert">
+          x
+        </button>
         {{ message }}
       </div>
     {% endfor %}
 
     <h1>Sign Up</h1>
 
-    <form method="POST" action="/auth/signup">
+    <form method="POST" action="/signup">
       {{ form.csrf_token }}
 
       <fieldset class="name">
@@ -69,7 +74,7 @@
 
       <fieldset class="website">
         {{ form.website.label }}
-        {{ form.website(placeholder='http://example.com') }}
+        {{ form.website(placeholder='https://example.com') }}
       </fieldset>
 
       <div class="submit-button">
@@ -79,7 +84,11 @@
     </form>
 
     <div class="login-signup">
-      <span>Already have an account? <a href="{{ url_for('auth_bp.login') }}">Log in.</a></span>
+      <div>
+        <span>Already have an account?</span>
+        <a href="{{ url_for('auth_bp.login') }}">Log in.</a>
+      </div>
     </div>
   </div>
+
 {% endblock %}
